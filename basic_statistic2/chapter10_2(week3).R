@@ -7,7 +7,7 @@ rm(list=ls())
 x <- 70;x
 n <- 250;n
 phat <- x/n;phat
-se_phat <- sqrt(phat*(1-phat)/n);se_phat
+se_phat <- sqrt(phat*(1-phat)/n);se_phat # 표준오차
 
 # 모비율의 구간추정
 # 실업률의 추정
@@ -16,7 +16,7 @@ n <- 500;n
 x <- 41;x
 phat <- x/n;phat
 se_phat <- sqrt(phat*(1-phat)/n);se_phat
-z_0.025 <- qnorm(0.025,lower.tail=F);z_0.025
+z_0.025 <- qnorm(0.025,lower.tail=F);z_0.025 # 95% 신뢰구간의 z값
 c(phat-z_0.025*se_phat,phat+z_0.025*se_phat)
 
 # 모비율의 가설검정
@@ -30,7 +30,7 @@ p0 <- 0.3;p0
 Z <- (phat-p0)/sqrt(p0*(1-p0)/n);Z
 pnorm(Z,lower.tail=F) <= 0.05
 Z >= qnorm(0.05,lower.tail=F)
-# 즉, 방사선 치료를 병행하는 것이 암의 완치율을 높이는데 효과가 있다고 할 수 있다
+# 즉, 방사선 치료를 병행하는 것이 암의 완치율을 높이는데 효과가 있다고 할 수 있다 [H0 기각]
 
 # 어느 대학교의 총학생회장 선거에서의 투표율을 알아보기 위해서 78명의 학생을 대상으로 조사한 결과 49명이 투표에 참가하였다고 하자. 총학생회장 선거의 투표율을 추정하고 추정량의 표준오차와 모비율에 대한 95% 신뢰구간을 제시하라.
 n <- 78;n
@@ -58,6 +58,7 @@ iris
 dat <- iris
 
 head(iris)
+head(iris,3)
 table(dat$Species)
 # H0: p = 0.3 vs. H1: p < 0.3
 n <- dim(dat)[1];n
@@ -67,10 +68,10 @@ phat <- x/n;phat
 se_phat <- sqrt(phat*(1-phat)/n);se_phat
 
 z_0.005 <- qnorm(0.005,lower.tail=F);z_0.005
-c(phat-z_0.005*se_phat,phat+z_0.005*se_phat) # 99% C.I.
-round(c(phat-z_0.005*se_phat,phat+z_0.005*se_phat),2)
+c(phat-z_0.005*se_phat,phat+z_0.005*se_phat) # 99% C.I.(신뢰구간)
+round(c(phat-z_0.005*se_phat,phat+z_0.005*se_phat),2) # 반올림, 나타내고 싶은 자릿수 =>2
 
-p0 <- 0.3;p0
-Z <- (phat-p0)/sqrt(p0*(1-p0)/n);Z
-pnorm(Z) <= 0.01
-Z <= qnorm(0.01) 
+p0 <- 0.3;p0 # H0
+Z <- (phat-p0)/sqrt(p0*(1-p0)/n);Z # H0의 검정 통계량
+pnorm(Z) <= 0.01 # p-value가 0.01보다 크다
+Z <= qnorm(0.01) # 검정통계량 값이 임계값보다 작지 않음
