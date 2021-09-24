@@ -33,7 +33,7 @@ qt(p = 1-alpha/2, df=9) #자유도가 9인 t 분포에서 상위 5%의 확률을
 n <- 15
 x_bar <- 39.3
 s <- 2.6
-se <- s/sqrt(n)
+se <- s/sqrt(n) # 표준 오차
 alpha <- 0.1
 t <- qt(1-alpha/2, df = n - 1)
 
