@@ -24,7 +24,7 @@ C.I. <- c(xbar-z_0.025*se,xbar+z_0.025*se);C.I.
 n <- 10;n
 s <- 0.4;s
 df <- n-1;df
-chi_0.05 <- qchisq(0.05,df,lower.tail=F);chi_0.05
+chi_0.05 <- qchisq(0.05,df,lower.tail=F);chi_0.05  # 카이제곱분포 사용
 chi_0.95 <- qchisq(0.95,df,lower.tail=F);chi_0.95
 c(s*sqrt((n-1)/chi_0.05),s*sqrt((n-1)/chi_0.95))
 
@@ -33,6 +33,7 @@ c(s*sqrt((n-1)/chi_0.05),s*sqrt((n-1)/chi_0.95))
 n <- 10;n
 df <- n-1;df
 s <- 0.81/sqrt((n-1)/qchisq(0.025,df,lower.tail=F));s
+
 # 2. 모표준편차 𝜎 에 대한 90% 신뢰구간을 구하라.
 chi_0.05;chi_0.95
 c(s*sqrt((n-1)/chi_0.05),s*sqrt((n-1)/chi_0.95))
@@ -53,20 +54,25 @@ sigma_0 <- 1.5;sigma_0
 chi <- (n-1)*(s^2)/(sigma_0^2);chi
 chi >= qchisq(0.05,df,lower.tail=F)
 # 유의수준 0.05에서 귀무가설을 기각할 수 있다. 
+# **반드시 아래처럼 해석까지 해야함*****
 #즉, 플라스틱 두께의 표준편차가 1.5mm를 초과하여 상품에 품질에 영향을 준다고 주장할 수 있다.
 
 # 예제. 정규모집단으로부터 19개의 관측치를 임의 추출하여 모표준편차에 대한 95% 신뢰구간을 구하였더니 (3.28, 6.32)의 결과를 얻었다.
 # 1. 모표준편차 𝜎에 대한 90% 신뢰구간을 구하라.
 n <- 19;n
 df <- n-1;df
+# 95% 신뢰구간
 chi_0.025 <- qchisq(0.025,df,lower.tail=F);chi_0.025
 chi_0.975 <- qchisq(0.975,df,lower.tail=F);chi_0.975
+# 90% 신뢰구간 
 chi_0.05 <- qchisq(0.05,df,lower.tail=F);chi_0.05
 chi_0.95 <- qchisq(0.95,df,lower.tail=F);chi_0.95
 c(3.28*sqrt(chi_0.025/chi_0.05), 6.32*sqrt(chi_0.975/chi_0.95))
+# 3.28: 95% 신뢰구간의 lower bound
+# sqrt(chi_0.025/chi_0.05)-> 95%신뢰구간이 90% 신뢰구간으로 바뀜
 
 # 2. 귀무가설 H0: sigma = 9에 대하여 유의수준 alpha = 0.05에서 양측검정을 시행하라.
-#H1: sigma !=9
+# H1: sigma !=9
 sigma_0 <- 9
 s <- 3.28/sqrt((n-1)/chi_0.025);s
 s <- 6.32/sqrt((n-1)/chi_0.975);s
@@ -75,5 +81,5 @@ chi <- (n-1)*(s^2)/(sigma_0^2);chi
 chi >= chi_0.025
 chi <= chi_0.975
 chi >= chi_0.025|chi <= chi_0.975 # 기각
-
-#chi square distribution is not symetric
+# 카이제곱분포는 symmetric 아니기 때문에!!
+# chi square distribution is not symmetric
